@@ -1,36 +1,85 @@
-# Evolution of Todo - Phase 1
+# Todo Full-Stack Web Application
 
-## Description
-This is a Python console application representing "Phase 1" of the Evolution of Todo project. It is built following Spec-Driven Development principles, focusing on an in-memory task management system.
+This is a multi-user todo application built with Next.js and FastAPI, featuring authentication and persistent storage.
+
+## Tech Stack
+
+- **Frontend**: Next.js 16+ (App Router), TypeScript, Tailwind CSS
+- **Backend**: Python FastAPI, SQLModel ORM
+- **Database**: Neon Serverless PostgreSQL
+- **Authentication**: Better Auth with JWT
+- **Spec-Driven Development**: Claude Code + Spec-Kit Plus
 
 ## Features
-The application provides the following core functionalities:
-1.  **Add Task**: Allows users to add new tasks with a title and description. Tasks are automatically assigned a unique ID and a "Pending" status.
-2.  **View Tasks**: Displays all current tasks in a formatted list, showing ID, status (Pending/Completed), title, and description.
-3.  **Update Task**: Enables users to modify the title and/or description of an existing task using its ID. Existing values are retained if no new input is provided.
-4.  **Delete Task**: Permanently removes a task from the list using its ID.
-5.  **Mark Complete**: Changes the status of a specified task from "Pending" to "Completed".
 
-## How to Run
-To run this application, ensure you have Python 3.13+ installed on your system.
-
-1.  **Install Python**: If you don't have Python 3.13+ installed, please download it from the official Python website.
-2.  **Navigate to the project directory**:
-    ```bash
-    cd /path/to/your/todo-app
-    ```
-3.  **Run the application**:
-    ```bash
-    python src/main.py
-    ```
+- User authentication (signup/signin)
+- Task CRUD operations (Create, Read, Update, Delete)
+- Task completion toggling
+- User data isolation
+- Responsive UI design
 
 ## Project Structure
+
 ```
-.
-├── .spec/
-├── src/
-└── README.md
+todo-fullstack-app/
+├── .specify/                 # Spec-Kit configuration
+├── specs/                    # Specifications
+│   ├── overview.md
+│   ├── features/
+│   ├── api/
+│   ├── database/
+│   └── ui/
+├── frontend/                 # Next.js application
+├── backend/                  # FastAPI application
+├── CLAUDE.md                 # Root Claude Code instructions
+└── README.md                 # This file
 ```
 
-## Spec-Driven Process
-This application was developed using Spec-Kit principles, guided by a Gemini Agent. The development process involved clear specifications for requirements and technical design, which were then implemented and iterated upon.
+## API Endpoints
+
+The application provides a RESTful API with the following endpoints:
+
+- `GET /api/{user_id}/tasks` - List all tasks for a user
+- `POST /api/{user_id}/tasks` - Create a new task
+- `GET /api/{user_id}/tasks/{id}` - Get task details
+- `PUT /api/{user_id}/tasks/{id}` - Update a task
+- `DELETE /api/{user_id}/tasks/{id}` - Delete a task
+- `PATCH /api/{user_id}/tasks/{id}/complete` - Toggle completion status
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Python 3.10+
+- Neon PostgreSQL account
+
+### Setup
+
+1. Clone the repository
+2. Set up environment variables for database and authentication
+3. Install dependencies for both frontend and backend
+4. Run the applications
+
+### Running the Application
+
+Frontend:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Backend:
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+## Security
+
+- All API endpoints require JWT authentication
+- Users can only access their own data
+- Passwords are securely handled by Better Auth
+- Input validation on both frontend and backend

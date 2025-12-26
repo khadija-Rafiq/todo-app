@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌸 Pastel Fresh Theme (No Grey) */
+:root {
+  --foreground-rgb: 43, 25, 65;            /* deep purple text */
+  --background-start-rgb: 255, 240, 246;   /* soft pink */
+  --background-end-rgb: 240, 248, 255;     /* alice blue */
+
+  --card-bg: 255, 255, 255;
+  --border-color: 221, 214, 254;           /* lavender */
+}
+
+/* 🌙 Dark mode – still colorful */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 45, 22, 78;     /* deep purple */
+    --background-end-rgb: 30, 64, 175;      /* indigo */
+
+    --card-bg: 49, 46, 129;
+    --border-color: 129, 140, 248;
+  }
+}
+
+/* 🌼 Body */
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    135deg,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+/* 📦 Pretty Cards */
+.card {
+  background: rgb(var(--card-bg));
+  border: 2px solid rgb(var(--border-color));
+  border-radius: 1.25rem;
+  padding: 1.2rem;
+  box-shadow: 0 12px 30px rgba(120, 100, 255, 0.25);
+}
+
+/* 🎀 Inputs */
+.input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.75rem;
+  border: 2px solid #c7d2fe;
+  background: #fdf4ff;
+}
+.input:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.4);
+}
+
+/* 💜 Buttons */
+.btn-add {
+  background: linear-gradient(135deg, #a78bfa, #f472b6);
+  color: white;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+}
+.btn-add:hover {
+  transform: scale(1.05);
+}
+
+.btn-complete {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  color: white;
+  border-radius: 999px;
+}
+
+.btn-undo {
+  background: linear-gradient(135deg, #fde047, #facc15);
+  color: #422006;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #fb7185, #ef4444);
+  color: white;
+}
+
+/* ✨ Headings */
+.heading {
+  color: #7c3aed;
+  font-weight: 800;
+}
+
+/* 🌈 Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#c084fc, #f472b6);
+  border-radius: 10px;
+}

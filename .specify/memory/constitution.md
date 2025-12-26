@@ -1,55 +1,79 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Todo Full-Stack Web Application Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Full-Stack Integration
+Modern web applications require seamless integration between frontend and backend. Every feature must be implemented across both layers with consistent user experience and data flow. Frontend (Next.js) and backend (FastAPI) must work in harmony through well-defined API contracts.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Security-First Architecture
+Security is paramount in multi-user applications. All API endpoints must implement proper authentication and authorization. User data isolation is non-negotiable - each user must only access their own data. JWT tokens with proper verification must secure all endpoints.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-First (NON-NEGOTIABLE)
+TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced. Both frontend and backend tests must be implemented for every feature.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. API-First Design
+All functionality must be designed through well-defined RESTful API contracts first. Frontend and backend implementations follow API specifications. Changes to API contracts require explicit approval and proper versioning considerations.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Database-Driven Architecture
+Data models and relationships form the foundation of application logic. All database schemas must be defined before implementation with proper indexing and constraints. SQLModel ORM patterns must be followed consistently.
 
-### [PRINCIPLE_6_NAME]
+### VI. Responsive UI/UX Design
+Frontend interfaces must be responsive and accessible across all device types. User experience should be intuitive with proper loading states, error handling, and feedback mechanisms.
 
+## Technology Stack Requirements
 
-[PRINCIPLE__DESCRIPTION]
+### Frontend
+- Next.js 16+ with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Better Auth for authentication
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### Backend
+- FastAPI for API framework
+- Python 3.10+
+- SQLModel for ORM
+- Neon Serverless PostgreSQL for database
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Authentication & Security
+- Better Auth with JWT tokens
+- Shared secret key for token verification
+- User isolation through JWT validation
+- Proper error handling for unauthorized access
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### API Standards
+- RESTful endpoints under `/api/` prefix
+- JWT tokens in Authorization header
+- Proper HTTP status codes
+- Consistent error response format
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+
+### Feature Implementation Process
+1. Define feature in specs/ directory
+2. Design API contracts in specs/api/
+3. Define database schema in specs/database/
+4. Implement backend API with tests
+5. Implement frontend components with tests
+6. Integrate frontend with backend API
+7. Test end-to-end functionality
+
+### Code Quality Standards
+- All code must follow established patterns in CLAUDE.md
+- Database operations through SQLModel only
+- API calls through centralized client
+- Proper error handling and validation
+- Type safety enforced throughout
+
+### Testing Requirements
+- Unit tests for all backend endpoints
+- Integration tests for API/database interactions
+- Frontend component tests
+- End-to-end tests for critical user flows
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+All implementations must comply with this constitution. Changes to core architecture require explicit approval and proper documentation. Every feature must be traceable to specifications and meet all security requirements.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+API endpoints must follow the specified patterns and security requirements. Database schemas must match specifications exactly. Authentication must be implemented on all endpoints that access user data.
+
+**Version**: 1.0.0 | **Ratified**: 2025-12-25 | **Last Amended**: 2025-12-25
