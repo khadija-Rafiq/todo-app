@@ -22,6 +22,7 @@ export default function Home() {
     setUserId(uid);
     setIsAuthenticated(true);
   };
+
   const handleLogout = () => {
     setUserId('');
     setIsAuthenticated(false);
@@ -57,10 +58,11 @@ export default function Home() {
 
   if (!isAuthenticated) {
     return (
-      <div className="container mx-auto p-4">
-        <h1 className="text-4xl font-bold mb-6 text-gradient bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+      <div className="max-w-7xl mx-auto p-4">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
           ✨ Todo App
         </h1>
+
         <div className="max-w-md mx-auto">
           <AuthComponent
             onLogin={handleLogin}
@@ -74,11 +76,14 @@ export default function Home() {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-5xl font-extrabold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-x">
-           Todo App
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 space-y-6">
+
+      {/* HEADER */}
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+          Todo App
         </h1>
+
         <AuthComponent
           onLogin={handleLogin}
           onLogout={handleLogout}
@@ -87,45 +92,58 @@ export default function Home() {
         />
       </div>
 
-      <div className="grid grid-cols-4 gap-6">
+      {/* MAIN GRID */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
         {/* ADD TASK */}
-        <div className="p-5 rounded-2xl bg-gradient-to-br from-purple-200 to-pink-200 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all">
-          <h2 className="font-bold mb-3 text-purple-800 text-xl">Add Task</h2>
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-purple-200 to-pink-200 shadow-lg">
+          <h2 className="font-bold mb-3 text-purple-800 text-lg">Add Task</h2>
+
           <input
             type="text"
             placeholder="Title"
             value={newTask.title}
             onChange={e => setNewTask({ ...newTask, title: e.target.value })}
-            className="w-full mb-2 p-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none transition"
+            className="w-full mb-2 p-2 border rounded-lg"
           />
+
           <input
             type="text"
             placeholder="Description"
             value={newTask.description}
             onChange={e => setNewTask({ ...newTask, description: e.target.value })}
-            className="w-full mb-2 p-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:outline-none transition"
+            className="w-full mb-2 p-2 border rounded-lg"
           />
+
           <button
             onClick={addTask}
-            className="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold hover:scale-105 transform transition-all shadow-md hover:shadow-xl"
+            className="w-full bg-purple-500 text-white py-2 rounded-lg font-semibold"
           >
             Add
           </button>
         </div>
 
         {/* VIEW TASK */}
-        <div className="p-5 rounded-2xl bg-gradient-to-br from-green-200 to-teal-200 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all overflow-y-auto max-h-72">
-          <h2 className="font-bold mb-3 text-green-800 text-xl">View Tasks</h2>
-          {tasks.length === 0 ? <p className="text-gray-500">No tasks</p> : tasks.map(t => (
-            <div key={t.id} className="border-b py-1">
-              <p className={`${t.completed ? 'line-through text-green-700' : 'text-gray-800'}`}>{t.title}</p>
-            </div>
-          ))}
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-green-200 to-teal-200 shadow-lg max-h-[300px] overflow-y-auto">
+          <h2 className="font-bold mb-3 text-green-800 text-lg">View Tasks</h2>
+
+          {tasks.length === 0 ? (
+            <p className="text-gray-500">No tasks</p>
+          ) : (
+            tasks.map(t => (
+              <div key={t.id} className="border-b py-1 text-sm">
+                <p className={t.completed ? 'line-through text-green-700' : ''}>
+                  {t.title}
+                </p>
+              </div>
+            ))
+          )}
         </div>
 
         {/* UPDATE TASK */}
-        <div className="p-5 rounded-2xl bg-gradient-to-br from-yellow-200 to-orange-200 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all">
-          <h2 className="font-bold mb-3 text-yellow-800 text-xl">Update Task</h2>
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-yellow-200 to-orange-200 shadow-lg">
+          <h2 className="font-bold mb-3 text-yellow-800 text-lg">Update Task</h2>
+
           <select
             value={editTask.id || ''}
             onChange={e => {
@@ -133,49 +151,59 @@ export default function Home() {
               const t = tasks.find(t => t.id === id);
               if (t) setEditTask({ id: t.id, title: t.title, description: t.description });
             }}
-            className="w-full mb-2 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition"
+            className="w-full mb-2 p-2 border rounded-lg"
           >
             <option value="">Select Task</option>
-            {tasks.map(t => <option key={t.id} value={t.id}>{t.title}</option>)}
+            {tasks.map(t => (
+              <option key={t.id} value={t.id}>{t.title}</option>
+            ))}
           </select>
+
           <input
             type="text"
             placeholder="Title"
             value={editTask.title}
             onChange={e => setEditTask({ ...editTask, title: e.target.value })}
-            className="w-full mb-2 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition"
+            className="w-full mb-2 p-2 border rounded-lg"
           />
+
           <input
             type="text"
             placeholder="Description"
             value={editTask.description}
             onChange={e => setEditTask({ ...editTask, description: e.target.value })}
-            className="w-full mb-2 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition"
+            className="w-full mb-2 p-2 border rounded-lg"
           />
+
           <button
             onClick={updateTask}
-            className="w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold hover:scale-105 transform transition-all shadow-md hover:shadow-xl"
+            className="w-full bg-yellow-500 text-white py-2 rounded-lg font-semibold"
           >
             Update
           </button>
         </div>
 
         {/* COMPLETE / DELETE */}
-        <div className="p-5 rounded-2xl bg-gradient-to-br from-red-200 to-pink-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all overflow-y-auto max-h-72">
-          <h2 className="font-bold mb-3 text-red-700 text-xl">Complete / Delete</h2>
-          {tasks.length === 0 ? <p className="text-gray-500">No tasks</p> : tasks.map(t => (
-            <div key={t.id} className="flex justify-between items-center mb-2">
-              <span className={`${t.completed ? 'line-through text-green-700' : 'text-gray-800'}`}>{t.title}</span>
-              <div className="flex space-x-2">
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-red-200 to-pink-300 shadow-lg max-h-[300px] overflow-y-auto">
+          <h2 className="font-bold mb-3 text-red-700 text-lg">Complete / Delete</h2>
+
+          {tasks.map(t => (
+            <div key={t.id} className="flex flex-col gap-2 mb-2 text-sm">
+              <span className={t.completed ? 'line-through text-green-700' : ''}>
+                {t.title}
+              </span>
+
+              <div className="flex gap-2">
                 <button
                   onClick={() => toggleComplete(t.id)}
-                  className={`px-3 py-1 rounded-lg text-white font-semibold ${t.completed ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-500 hover:bg-green-600'} transition-all`}
+                  className="flex-1 bg-green-500 text-white py-1 rounded-lg"
                 >
                   {t.completed ? 'Undo' : 'Complete'}
                 </button>
+
                 <button
                   onClick={() => deleteTask(t.id)}
-                  className="px-3 py-1 rounded-lg bg-red-500 hover:bg-red-600 text-white font-semibold transition-all"
+                  className="flex-1 bg-red-500 text-white py-1 rounded-lg"
                 >
                   Delete
                 </button>
@@ -183,6 +211,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
