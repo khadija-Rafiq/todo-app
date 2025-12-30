@@ -50,8 +50,25 @@ class Task(SQLModel, table=True):
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
 # Database setup
+
 DATABASE_URL = os.getenv("DATABASE_URL")
-engine = create_engine(DATABASE_URL, echo=True)
+if not DATABASE_URL or DATABASE_URL.strip() == "":
+    DATABASE_URL = "sqlite:///./database.db"
+
+
+# Set connect_args based on database type
+if DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
+else:
+    connect_args = {}
+
+engine = create_engine(
+    DATABASE_URL,
+    echo=True,
+    connect_args=connect_args
+)
+
+
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(bind=engine)
